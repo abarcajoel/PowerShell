@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<head>
+		<meta charset="UTF-8" />
+		<meta name="keywords" content="noticias" />
+		<title>Trabajo ISO</title>
+		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+		
+<script>
+
+		var usuariosValidos;
+		var usuarios = [
+			{nombre:"usuario", pass:"usuario"},
+			{nombre:"admin", pass:"admin"},
+			
+			]
+		function login() {
+			var formulario = document.forms["form_modal"];
+			var nombre = formulario.nombre.value;
+			var contra = formulario.contra.value;
+			for (var i = 0; i < usuarios.length; i++) {
+				if(usuarios[i].nombre===nombre && usuarios[i].pass===contra){
+				usuariosValidos = usuarios[i].nombre;
+				}
+			}
+			if (usuariosValidos != undefined) {
+				document.getElementById("valoracion1").style.display = "block";
+				document.getElementById("valoracion2").style.display = "block";
+				document.getElementById("valoracion3").style.display = "block";
+				document.getElementById("comentario1").style.display = "block";
+				document.getElementById("comentario2").style.display = "block";
+				document.getElementById("comentario3").style.display = "block";	
+				document.getElementById("login").innerHTML = '<p>'+'<span class="logueado">'+ usuariosValidos + " " + 'conectado' +  '<span>'+ "      " + '<button onclick="salir()" >Cerrar sesion</button>'+'</p>';
+			}
+			return false;
+			}
+		
+		function salir(){
+				 usuariosValidos = undefined;
+				document.getElementById("valoracion1").style.display = "none";
+				document.getElementById("valoracion2").style.display = "none";
+				document.getElementById("valoracion3").style.display = "none";
+				document.getElementById("comentario1").style.display = "none";
+				document.getElementById("comentario2").style.display = "none";
+				document.getElementById("comentario3").style.display = "none";
+				document.getElementById("login").innerHTML = '<form id="form_modal" onsubmit="return login()" name="form_modal">' + '<input type="text" name="nombre" placeholder="Tu nombre aquí" required>' + '<input type="password" name="contra" placeholder="Introduce la contraseña aquí" required>'+'<input type="submit" name="submit" value="Entrar">' +'</form>';				
+
+
+		}
+		function mostrarComentario1(){
+				document.getElementById("lista").style.display = "block";	
+				document.getElementById("mostrar1").innerHTML = '<span onclick="ocultar()">Mostrar/Ocultar</span>';			
+		}
+		function ocultar(){
+				document.getElementById("lista").style.display = "none";
+				document.getElementById("mostrar1").innerHTML = '<span onclick="mostrarComentario1()">Mostrar/Ocultar</span>';
+		}		
+
+		function mostrarComentario2(){
+				document.getElementById("lista2").style.display = "block";	
+				document.getElementById("mostrar2").innerHTML = '<span onclick="ocultar2()">Mostrar/Ocultar</span>';		
+		}
+		function ocultar2(){
+				document.getElementById("lista2").style.display = "none";
+				document.getElementById("mostrar2").innerHTML = '<span onclick="mostrarComentario2()">Mostrar/Ocultar</span>';
+		}		
+
+		function mostrarComentario3(){
+				document.getElementById("lista3").style.display = "block";	
+				document.getElementById("mostrar3").innerHTML = '<span onclick="ocultar3()">Mostrar/Ocultar</span>';				
+		}
+		function ocultar3(){
+				document.getElementById("lista3").style.display = "none";
+				document.getElementById("mostrar3").innerHTML = '<span onclick="mostrarComentario3()">Mostrar/Ocultar</span>';				
+		}				
+		function insertarComentario1() {
+		var valor = document.getElementById("texto").value;
+		var lista = document.getElementById("lista");
+		if(valor !== ""){
+			var LI = document.createElement("LI");
+			LI.innerHTML = valor;
+			lista.appendChild(LI);
+			var valor = document.getElementById("texto").value="";
+			}
+		}
+
+		function insertarComentario2() {
+		var valor2 = document.getElementById("texto2").value;
+		var lista2 = document.getElementById("lista2");
+		if(valor2 !== ""){
+			var LI2 = document.createElement("LI");
+			LI2.innerHTML = valor2;
+			lista2.appendChild(LI2);
+			var valor2 = document.getElementById("texto2").value="";
+			}
+		}		
+		
+		function insertarComentario3() {
+		var valor3 = document.getElementById("texto3").value;
+		var lista3 = document.getElementById("lista3");
+		if(valor3 !== ""){
+			var LI3 = document.createElement("LI");
+			LI3.innerHTML = valor3;
+			lista3.appendChild(LI3);
+			var valor3 = document.getElementById("texto3").value="";
+			}
+		}
+		
+		function eliminar(elemento)
+        {
+            var id=elemento.parentNode.getAttribute("id");
+            node=document.getElementById(id);
+            node.parentNode.removeChild(node);
+        } 
+		
+		window.onscroll = function() {scrollFunction()};
+
+		function scrollFunction() {
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			document.getElementById("subir").style.display = "block";
+		} else {
+        document.getElementById("subir").style.display = "none";
+			}
+		}
+
+		function subirArriba() {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
+		}
+
+	function dialogoModal(){
+		var panel = document.getElementById('dialogo');
+		panel.style.marginTop = "100px"; 
+		panel.style.marginLeft = ((document.body.clientWidth-170) / 2) +  "px";
+		panel.style.display = 'block'; 
+	}
+
+	function ocultarModal(){
+		var panel = document.getElementById('dialogo');
+		panel.style.display = 'none';
+	}
+	
+	
+</script>	
+</head>
+<body>
+
+<div class="cabecera">
+        <div class="img-cabecera"><img src="imagenes/powershell.png"></div>
+        <h1>PowerShell</h1>
+         <p> Esta página web va sobre oticias sobre Scripts basicos de un Administrador.</p>
+</div>
+	
+<button class="boton_personalizado" onclick="dialogoModal()">Loguearse</button>
+<div class="ventana" id="dialogo">
+ <div class="titulo_loguearse">Loguearse</div>
+    <div id="login" class="login">
+    <form id="form_modal" onsubmit="return login()" name="form_modal">
+		<input type="text" name="nombre" title="usuario" placeholder="Usuario" required>
+		<input type="password" name="contra" title="contraseña" placeholder="Contraseña" required>
+		<input type="submit" name="submit" value="Entrar">
+    </form>
+	</div>
+<div class="cerrar_modal"><input id="btnAceptar" onclick="ocultarModal()" name="btnAceptar" type="button" value="Cerrar" />
+  </div>
+</div> 
+ 
+
+	
+ <div id="contenedor" class="contenedor"> 
+ 
+	<aside class="izquierda">
+		<div class="img-contenedor">
+			<img src="imagenes/proceso.jpg" alt="proceso" />
+		</div>
+		<h1>Encuentra los cinco procesos que usan más memoria.</h1></br>
+		<p>ps | sort –p ws | select –last 5.</p></br>
+		
+		<div class="coment" id="comentarios">
+		<p id="valoracion1" class="clasificacion">
+			<input id="radio1" name="estrellas" value="5" type="radio">
+			<label for="radio1">★</label>
+			<input id="radio2" name="estrellas" value="4" type="radio">
+			<label for="radio2">★</label>
+			<input id="radio3" name="estrellas" value="3" type="radio">
+			<label for="radio3">★</label>
+			<input id="radio4" name="estrellas" value="2" type="radio">
+			<label for="radio4">★</label>
+			<input id="radio5" name="estrellas" value="1" type="radio">
+			<label for="radio5">★</label>
+		</p>
+		<div class="conten">
+			<h2>Comentarios:</h2>
+			<div class="mostrar1" id="mostrar1">
+				<span onclick="mostrarComentario1()">Mostrar/Ocultar</span>
+			</div>
+				<ul class="lista1" id="lista">
+					<li>Pedazo Script</li>
+				</ul> 
+		<div id="comentario1" class="insertar_comentario">
+			<label class="pes" for="texto"> . </label>
+			<input type="text" name="elemento" id="texto" >
+			<button onclick="insertarComentario1()">Comentar</button>
+		</div>
+		</div>
+		</div>	
+	</aside> 
+		
+		
+	<section class="section">
+		<div class="imgnoticias">
+			<img src="imagenes/w.jpg" alt="window" />
+		</div>
+		<h1>Obtener información sobre la fabricación y modelo de un ordenador</h1></br>
+		<p>Get-WmiObject -Class Win32_ComputerSystem.</p></br>
+		<div class="coment" id="comentarios2">
+		<p id="valoracion2" class="clasificacion">
+			<input id="radio6" name="estrellas" value="5" type="radio">
+			<label for="radio6">★</label>
+			<input id="radio7" name="estrellas" value="4" type="radio">
+			<label for="radio7">★</label>
+			<input id="radio8" name="estrellas" value="3" type="radio">
+			<label for="radio8">★</label>
+			<input id="radio9" name="estrellas" value="2" type="radio">
+			<label for="radio9">★</label>
+			<input id="radio10" name="estrellas" value="1" type="radio">
+			<label for="radio10">★</label>
+		</p>
+		<div class="conten">
+			<h2>Comentarios:</h2>
+			<div class="mostrar2" id="mostrar2">
+				<span onclick="mostrarComentario2()">Mostrar/Ocultar</span>
+			</div>
+				<UL class="lista2" id="lista2">
+					<li>Pedazo script</li>
+				</UL> 
+		<div id="comentario2" class="insertar_comentario">
+			<label class="pes" for="texto2"> . </label>
+			<input type="text" name="elemento" id="texto2" >
+			<button onclick="insertarComentario2()">Comentar</button>
+		</div>
+		</div>
+		</div>	
+	</section> 
+
+	
+	<aside class="derecha">
+		<div class="imgnoticias">
+			<img src="imagenes/bios.jpg" alt="bios" />
+		</div>
+		<h1>Obtener información sobre la BIOS de la computadora actual</h1></br>
+		<p>Get-WmiObject -Class Win32_BIOS -ComputerName </p></br>
+		<div class="coment" id="comentarios3">
+		<p id="valoracion3" class="clasificacion">
+			<input id="radio11" name="estrellas" value="5" type="radio">
+			<label for="radio11">★</label>
+			<input id="radio12" name="estrellas" value="4" type="radio">
+			<label for="radio12">★</label>
+			<input id="radio13" name="estrellas" value="3" type="radio">
+			<label for="radio13">★</label>
+			<input id="radio14" name="estrellas" value="2" type="radio">
+			<label for="radio14">★</label>
+			<input id="radio15" name="estrellas" value="1" type="radio">
+			<label for="radio15">★</label>
+		</p>
+		<div class="conten">
+		
+			<h2>Comentarios:</h2>
+			<div class="mostrar3" id="mostrar3">
+				<span onclick="mostrarComentario3()">Mostrar/Ocultar</span>
+			</div>
+			<UL class="lista3" id="lista3">
+				<li>Me parece un buen refuerzo</li>
+			</UL> 		
+		<div id="comentario3" class="insertar_comentario">
+			<label class="pes" for="texto3"> .</label>
+			<input type="text" name="elemento" id="texto3" >
+			<button onclick="insertarComentario3()">Comentar</button>
+		</div>
+		</div>
+		</div>
+	</aside> 
+	
+	<button class="subir" onclick="subirArriba()" id="subir" title="Ir arriba">Arriba</button>	
+</div>
+</body>
+</html> 
